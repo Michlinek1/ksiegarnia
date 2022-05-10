@@ -1,0 +1,24 @@
+.Tekst{
+    text-align: center;
+}
+#Przyciski{
+    text-align:center;
+    display: flex;
+    justify-content: center; 
+}
+button{
+    width: 110px;
+    height: 45px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rgb(184, 184, 184);
+    border-color: grey;
+}
+b{
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+
+}
+
