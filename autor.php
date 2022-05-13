@@ -1,6 +1,7 @@
 <?php
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,8 +112,7 @@ if(isset($_POST['dodawanieautor'])){
     echo "<input type = 'submit' name = 'dodajautor' value = 'Dodaj'>";
     echo "</form>";
     echo "</div>";
-    $przycisk = $_POST['dodajautor'];
-    echo gettype($przycisk);
+  
    
 
 }
@@ -123,18 +123,37 @@ if($przycisk){
     $narodowosc = $_POST['narodowosc'];
     $data = $_POST['data'];
     $sql = mysqli_query($pol, "INSERT INTO autor (Imie, Nazwisko, Narodowosc, Okres_Wydania) VALUES ('$imie', '$nazwisko', '$narodowosc', '$data')");
-    header("Location: index.php");
 }
 
 if(isset($_POST['usuwanieautor'])){
     echo "<p class='tekst'>Wpisz id autora ktorego chcesz usunac</p>";
     echo "<form method='post'>";
-    echo "<input type='number' name='wyborid'>"."<br>";
-    echo "<input type='submit' name='potwierdz' value='Usuń'>";
+    echo "<input type = 'number' name = 'idautora' placeholder = 'ID autora'>";
+    echo "<input type='submit' name='usun' value='Usuń'>";
     echo "</form>";
-    if(isset($_POST['']))
-#jesli jest ustaweione $post wyborid. jesli jest to z lewej i id jest w bazie to usuwa a jak id nie ma w bazie to pisze ci ze nie ma autora z takim id 
+     
+    
 }
+if(isset($_POST['usun'])){  
+    $row = mysqli_fetch_assoc($sql);
+    $sql = mysqli_query($pol, "SELECT * FROM autor");
+    if(mysqli_num_rows($sql) > 0){
+    while($row = mysqli_fetch_assoc($sql)){
+    if($_POST['idautora'] == ""){
+        echo "<p class='tekst'>Wpisz id autora ktorego chcesz usunac</p>";
+    }elseif($_POST['idautora'] != $row['id_autora']){
+        echo "<p class='tekst'>Nie ma tak   iego id</p>";
+    }else{
+        $sql = mysqli_query($pol, "DELETE FROM autor WHERE id_autora = '$_POST[idautora]'");
+    }
+}
+    }
+}
+
+ 
+
+
+
 ?>
 
 </body>
